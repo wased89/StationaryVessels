@@ -6,7 +6,7 @@ namespace StationaryVessels
     {
         private Vessel vessel;
         [Persistent]
-        public static bool isFrozen;
+        public bool isFrozen;
 
         public bool getFrozen()
         {
