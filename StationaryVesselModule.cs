@@ -5,13 +5,8 @@ namespace StationaryVessels
     public class StationaryVesselModule : VesselModule
     {
         private Vessel vessel;
-        [Persistent]
-        public bool isFrozen;
-
-        public bool getFrozen()
-        {
-            return isFrozen;
-        }
+        
+        
         public void Start()
         {
             Debug.Log("StationaryStart");
@@ -30,6 +25,7 @@ namespace StationaryVessels
         {
             foreach (Part p in vessel.parts)
             {
+                if(p.Modules.Contains("StationaryModule")) { p.GetComponent<StationaryModule>().setFreeze(true); }
                 if (p.GetComponent<Rigidbody>() == null) { continue; }
                 p.GetComponent<Rigidbody>().isKinematic = true;
 
@@ -39,14 +35,22 @@ namespace StationaryVessels
         {
             foreach (Part p in vessel.parts)
             {
+                if (p.Modules.Contains("StationaryModule")) { p.GetComponent<StationaryModule>().setFreeze(false); }
                 if (p.GetComponent<Rigidbody>() == null) { continue; }
                 p.GetComponent<Rigidbody>().isKinematic = false;
             }
         }
-
-        public void toggleFrozen()
+        public void toggleFreeze(bool freeze)
         {
-            isFrozen = !isFrozen;
+            if(freeze)
+            {
+                UnFreezeVessel();
+            }
+            else
+            {
+                FreezeVessel();
+            }
         }
+        
     }
 }
