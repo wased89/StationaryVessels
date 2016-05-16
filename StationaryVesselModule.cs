@@ -7,7 +7,6 @@ namespace StationaryVessels
     public class StationaryVesselModule : VesselModule
     {
         private Vessel vessel;
-        private List<StationaryModule> modules;
         public void Start()
         {
             Debug.Log("StationaryStart");
@@ -20,7 +19,6 @@ namespace StationaryVessels
                     p.AddModule("StationaryModule");
                 }
             }
-            RebuildModulesList();
         }
 
         public void FreezeVessel()
@@ -43,16 +41,6 @@ namespace StationaryVessels
             }
             vessel.GoOnRails();
             vessel.GoOffRails();
-        }
-        private void RebuildModulesList()
-        {
-            if (modules == null) { modules = new List<StationaryModule>(); }
-            List<Part> parts = vessel.parts.FindAll(p => p.Modules.Contains("StationaryModule"));
-
-            foreach (Part p in parts)
-            {
-                modules.Add(p.Modules.GetModule<StationaryModule>());
-            }
         }
         public void toggleFreeze(bool freeze)
         {
