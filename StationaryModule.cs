@@ -20,7 +20,7 @@ namespace StationaryVessels
             ToggleFreeze();
             if(!isFrozen)
             {
-                SVM.UnFreezeVessel();
+                vessel.GetComponent<StationaryVesselModule>().UnFreezeVessel();
             }
         }
 
